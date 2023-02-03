@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql:8.0.31
+    environment:
+      MYSQL_DATABASE: braintly_todolist
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - '3306:3306'
+  app:
+    image: jkaninda/laravel-php-fpm:8.2
+    working_dir: /var/www
+    ports:
+      - '8000:8000'
+    volumes:
+      - '../:/var/www'
+    depends_on:
+      - mysql
